@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册</title>
+<script type="text/javascript">
+    window.onload=function(){
+    	console.log('页面加载以后');
+    	var fld = document.getElementById('username');
+    	console.log(fld);
+    	fld.onblur=checkUsername;
+    }
+    
+    function checkUsername(){
+    	console.log('检查用户名...');
+    	var name = document.getElementById('username').value;
+    	var url = 'checkName?name='+name;
+    	console.log(url);
+    	var xhr = new XMLHttpRequest();
+    	xhr.open('GET',url);
+    	xhr.send();
+    	xhr.onreadystatechange=function(){
+    		if(xhr.readyState==4&&xhr.status==200){
+    			var data = xhr.responseText;
+    			console.log(data);
+    			var pass = eval(data);
+    			console.log(pass);
+    			var span = document.getElementById('username-msg');
+    			if(pass){
+    				span.innerHTML='';
+    			}else{
+    				span.innerHTML='用户名已注册'
+    			}
+    		}
+
+    	};
+    }
+    
+</script>
+</head>
+<body>
+   <h1>注册</h1>
+   <form action="">
+      <div>
+         <label>用户名</label>
+         <input type="text" name="username" id="username"/>
+         <span class="error" id="username-msg"></span>
+      </div>
+      <div>
+         <label>密码</label>
+         <input type="password" name="password" id="password"/>
+         <span class="error" id="password-msg"></span>
+      </div>
+      <div>
+        <input type="submit" value="保存"/>
+      </div>
+   </form>
+</body>
+</html>

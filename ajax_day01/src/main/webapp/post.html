@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+   function postDemo(){
+	   var xhr = new XMLHttpRequest();
+	   var url = 'post';
+	   var param = 'name=范老师&age=18';
+	   xhr.onreadystatechange=function(){
+		   console.log(xhr.readyState);
+		   if(xhr.readyState==4&&xhr.status==200){
+			   var data = xhr.responseText;
+			   console.log(data);
+		   }
+	   };
+	   xhr.open('POST',url);
+	   //必须添加HTTP请求头才能支持Post方法
+	   xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+	   xhr.send(param);
+   }
+</script>
+</head>
+<body>
+   <h1>Post 请求</h1>
+   <button onclick="postDemo()">Demo</button>
+</body>
+</html>

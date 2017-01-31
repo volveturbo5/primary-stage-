@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+   //创建XHR对象
+   function getXhr(){
+	   if(window.XMLHttpRequest){
+		   //Chrome，Firefox等标准浏览器
+		   return new XMLHttpRequest();
+	   }
+	   //适合早起的IE浏览器
+	   return new ActiveXObject('Microsoft.XMLHttp');
+   }
+   
+   function ajaxDemo(){
+	   var xhr = getXhr();
+	   console.log(xhr);
+	   xhr.open('GET','http://localhost:8080/ajax_day01/demo');
+	   xhr.send();
+	   xhr.onreadystatechange=function(){
+		   console.log(xhr.readyState);
+		   if(xhr.readyState==4&&xhr.status==200){
+			   //终于成功了
+			   var data = xhr.responseText;
+			   console.log(data);
+		   }
+	   };
+   }
+</script>
+</head>
+<body>
+   <h1>Ajax DEMO</h1>
+   <button onclick="ajaxDemo()">DEMO</button>
+</body>
+</html>
